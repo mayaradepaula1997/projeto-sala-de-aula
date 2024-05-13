@@ -25,6 +25,8 @@ public class Aluno implements Serializable {
     private LocalDate dataNascimento;
     private String sexo;
 
+    @ManyToOne
+    @JoinColumn (name = "sala_id")
     private SalaDeAula salaDeAula;
 
     public Aluno(){

@@ -6,6 +6,7 @@ import org.apache.juli.logging.Log;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -21,19 +22,20 @@ public class SalaDeAula implements Serializable {
     private Long id;
     private Integer numero;
     private String professor;
-    private Instant horario;
+    private LocalTime horario;
 
+    @OneToMany(mappedBy = "salaDeAula")
     private List <Aluno> alunos = new ArrayList<>();
 
-    public SalaDeAula (){
+    public SalaDeAula() {
 
     }
 
-    public SalaDeAula(Long id, Integer numero, Instant horario, String professor, List<Aluno> alunos) {
-        this.id = id;
+    public SalaDeAula(Long id,Integer numero, String professor, LocalTime horario, List<Aluno> alunos) {
         this.numero = numero;
-        this.horario = horario;
+        this.id = id;
         this.professor = professor;
+        this.horario = horario;
         this.alunos = alunos;
     }
 
@@ -61,11 +63,11 @@ public class SalaDeAula implements Serializable {
         this.professor = professor;
     }
 
-    public Instant getHorario() {
+    public LocalTime getHorario() {
         return horario;
     }
 
-    public void setHorario(Instant horario) {
+    public void setHorario(LocalTime horario) {
         this.horario = horario;
     }
 
