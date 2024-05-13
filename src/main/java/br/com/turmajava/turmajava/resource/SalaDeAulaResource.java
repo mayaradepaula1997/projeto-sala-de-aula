@@ -8,6 +8,7 @@ import br.com.turmajava.turmajava.services.AlunoService;
 import br.com.turmajava.turmajava.services.SalaDeAulaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,6 +22,7 @@ public class SalaDeAulaResource {
    private SalaDeAulaService salaDeAulaService; //injeção de dependência da nossa classe de serviço
 
 
+    @GetMapping
     public ResponseEntity<List<SalaDeAula>> findAll() {
         List<SalaDeAula> list = salaDeAulaService.findAll();
         return ResponseEntity.ok().body(list);

@@ -1,5 +1,6 @@
 package br.com.turmajava.turmajava.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.apache.juli.logging.Log;
 
@@ -24,6 +25,7 @@ public class SalaDeAula implements Serializable {
     private String professor;
     private LocalTime horario;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "salaDeAula")
     private List <Aluno> alunos = new ArrayList<>();
 
