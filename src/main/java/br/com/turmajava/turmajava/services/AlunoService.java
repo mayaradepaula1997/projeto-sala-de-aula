@@ -26,4 +26,12 @@ public class AlunoService {
         return aluno.get();
 
     }
+
+    public void deleteAllAlunos(){
+        alunoRepository.deleteAll();
+    }
+
+    public void deleteAlunoById(Long id){
+        alunoRepository.deleteById(id);
+    }
 }

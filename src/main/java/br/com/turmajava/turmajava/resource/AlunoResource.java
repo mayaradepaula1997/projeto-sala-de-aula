@@ -5,10 +5,7 @@ import br.com.turmajava.turmajava.entities.Aluno;
 import br.com.turmajava.turmajava.services.AlunoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,11 +23,23 @@ public class AlunoResource {
     }
 
 
-    @GetMapping (value = "/{id}")
+    @GetMapping(value = "/{id}")
     public ResponseEntity<Aluno> findById (@PathVariable Long id){
         Aluno aluno = service.findById(id);
         return ResponseEntity.ok(aluno);
 
+    }
+
+    @DeleteMapping
+    public ResponseEntity<Void> deleteAllAlunos (){
+        service.deleteAllAlunos();
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> deleteAlunoById (@PathVariable Long id){
+        service.deleteAlunoById(id);
+        return ResponseEntity.noContent().build();
     }
 
 
