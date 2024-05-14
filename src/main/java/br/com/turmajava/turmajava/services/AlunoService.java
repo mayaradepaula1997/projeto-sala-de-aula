@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Service //@Service para indicar que a classe será de serviços para o banco de dados
@@ -18,6 +19,11 @@ public class AlunoService {
     public List <Aluno> findAll(){ //serviço para listar todos os alunos
         return alunoRepository.findAll(); // findAll() é uma função que o nosso repository
 
+    }
+
+    public Aluno findById (Long id){
+        Optional<Aluno> aluno = alunoRepository.findById(id);
+        return aluno.get();
 
     }
 }

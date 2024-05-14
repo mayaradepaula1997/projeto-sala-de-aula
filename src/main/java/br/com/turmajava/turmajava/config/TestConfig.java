@@ -40,10 +40,12 @@ public class TestConfig implements CommandLineRunner {
         SalaDeAula salaDeAula2 = new SalaDeAula(null,2,"José",horaEspecifica2,null);
 
         Aluno aluno1 = new Aluno(null,"5555","Pedro Andre",15,LocalDate.parse("22/05/2005", formatter),"Masculino",salaDeAula2);
+        Aluno aluno2 = new Aluno(null,"6666","Sophia Matins", 14,LocalDate.parse("23/04/2006",formatter),"Feminino",salaDeAula2);
+        Aluno aluno3 = new Aluno( null,"7777", "Felipe Lopes",15,LocalDate.parse("28/05/2005",formatter),"Masculino",salaDeAula2);
 
         salaDeAulaRepository.saveAll(Arrays.asList(salaDeAula1,salaDeAula2));
 
-        alunoRepository.save(aluno1);
+        alunoRepository.saveAll(Arrays.asList(aluno1,aluno2,aluno3));
 
 
     }
