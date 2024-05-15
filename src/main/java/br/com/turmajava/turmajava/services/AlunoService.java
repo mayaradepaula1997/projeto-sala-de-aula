@@ -24,7 +24,6 @@ public class AlunoService {
     public Aluno findById (Long id){
         Optional<Aluno> aluno = alunoRepository.findById(id);
         return aluno.get();
-
     }
 
     public void deleteAllAlunos(){
@@ -34,4 +33,29 @@ public class AlunoService {
     public void deleteAlunoById(Long id){
         alunoRepository.deleteById(id);
     }
+
+    public Aluno insert (Aluno aluno){
+        return alunoRepository.save(aluno);
+    }
+
+    public Aluno updateAluno (Aluno updateAluno) { //verificar se usuario existe
+        Aluno existingAluno = alunoRepository.findById(updateAluno.getId()).orElse(null);
+        if (existingAluno == null){
+            throw new RuntimeException("Usuário não encontrado");
+        }
+        existingAluno.setMatricula(updateAluno.getMatricula());
+        existingAluno.setNome(updateAluno.getNome());
+        existingAluno.setIdade(updateAluno.getIdade());
+        existingAluno.setDataNascimento(updateAluno.getDataNascimento());
+        existingAluno.setSexo(updateAluno.getSexo());
+        existingAluno.setSalaDeAula(updateAluno.getSalaDeAula());
+
+        return alunoRepository.save(existingAluno);
+
+    }
+
+
+
+
+
 }

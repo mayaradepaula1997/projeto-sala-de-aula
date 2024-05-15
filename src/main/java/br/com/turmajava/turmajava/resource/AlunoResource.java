@@ -6,7 +6,9 @@ import br.com.turmajava.turmajava.services.AlunoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController //sistema entenda que ali será uma classe que controlará as requisições
@@ -42,6 +44,23 @@ public class AlunoResource {
         return ResponseEntity.noContent().build();
     }
 
+    @PostMapping
+    public ResponseEntity <Aluno> insertAluno (@RequestBody Aluno aluno){
+        Aluno insertAluno = service.insert(aluno);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(insertAluno.getId()).toUri();
+        return ResponseEntity.created(uri).body(insertAluno);
+    }
 
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Aluno> updateAluno (@PathVariable Long id ,@RequestBody Aluno updateAluno){
+        try {
+            updateAluno.setId(id); //certificar dedefinir o Id do usuario atualizado
+            Aluno aluno = service.updateAluno(updateAluno);
+            return ResponseEntity.ok(aluno);
+        }catch (RuntimeException e){
+            return  ResponseEntity.notFound().build();
+
+        }
+    }
 
 }
