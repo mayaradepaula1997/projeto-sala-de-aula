@@ -1,16 +1,15 @@
 package br.com.turmajava.turmajava.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import org.apache.juli.logging.Log;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.time.Instant;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Entity
 @Table(name = "tb_sala_de_aula")
@@ -25,8 +24,10 @@ public class SalaDeAula implements Serializable {
     private String professor;
     private LocalTime horario;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "salaDeAula")
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "salaDeAula")
+    @OneToMany(mappedBy = "salaDeAula", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List <Aluno> alunos = new ArrayList<>();
 
     public SalaDeAula() {

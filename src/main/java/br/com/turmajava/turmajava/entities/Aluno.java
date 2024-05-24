@@ -1,5 +1,6 @@
 package br.com.turmajava.turmajava.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import org.apache.juli.logging.Log;
 
@@ -27,6 +28,7 @@ public class Aluno implements Serializable {
 
     @ManyToOne
     @JoinColumn (name = "sala_id")
+    @JsonBackReference
     private SalaDeAula salaDeAula;
 
     public Aluno(){
