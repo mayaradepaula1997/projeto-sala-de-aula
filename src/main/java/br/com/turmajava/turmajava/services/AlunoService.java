@@ -25,15 +25,6 @@ public class AlunoService {
         Optional<Aluno> aluno = alunoRepository.findById(id);
         return aluno.get();
     }
-
-    public void deleteAllAlunos(){
-        alunoRepository.deleteAll();
-    }
-
-    public void deleteAlunoById(Long id){
-        alunoRepository.deleteById(id);
-    }
-
     public Aluno insert (Aluno aluno){
         return alunoRepository.save(aluno);
     }
@@ -53,6 +44,15 @@ public class AlunoService {
         return alunoRepository.save(existingAluno);
 
     }
+
+
+    public void deleteAlunoById(Long id){
+        alunoRepository.deleteById(id);
+    }
+
+
+
+
 
 
 }

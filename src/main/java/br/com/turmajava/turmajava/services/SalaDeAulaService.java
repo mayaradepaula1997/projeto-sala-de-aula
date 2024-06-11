@@ -27,11 +27,6 @@ public class SalaDeAulaService {
     }
 
 
-    public void deleteAllSalaDeAula(){
-        salaDeAulaRepository.deleteAll();
-    }
-
-
     public void deleteSalaDeAulaById(Long id){
         salaDeAulaRepository.deleteById(id);
     }

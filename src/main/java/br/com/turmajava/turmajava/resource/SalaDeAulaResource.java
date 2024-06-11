@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-@RestController //sistema entenda que ali será uma classe que controlará as requisições
+@RestController //classe que controlará as requisições
 @RequestMapping(value = "/sala")
 public class SalaDeAulaResource {
 
@@ -42,19 +42,6 @@ public class SalaDeAulaResource {
         return ResponseEntity.ok(salaDeAula);
 
     }
-
-    @DeleteMapping
-    public ResponseEntity<Void> deleteAllSalaDeAula(){
-        salaDeAulaService.deleteAllSalaDeAula();
-        return ResponseEntity.noContent().build();
-    }
-
-    @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> deleteSalaDeAulaById (@PathVariable Long id){
-        salaDeAulaService.deleteSalaDeAulaById(id);
-        return ResponseEntity.noContent().build();
-    }
-
 
     @PostMapping
     public ResponseEntity<SalaDeAula> insertSalaDeAula(@RequestBody Map<String, Object> salaDeAulaMap) {
@@ -84,6 +71,12 @@ public class SalaDeAulaResource {
             return  ResponseEntity.notFound().build();
 
         }
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> deleteSalaDeAulaById (@PathVariable Long id){
+        salaDeAulaService.deleteSalaDeAulaById(id);
+        return ResponseEntity.noContent().build();
     }
 
 

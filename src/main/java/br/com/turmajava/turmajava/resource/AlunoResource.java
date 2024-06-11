@@ -41,19 +41,6 @@ public class AlunoResource {
 
     }
 
-    @DeleteMapping
-    public ResponseEntity<Void> deleteAllAlunos (){
-        service.deleteAllAlunos();
-        return ResponseEntity.noContent().build();
-    }
-
-
-    @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> deleteAlunoById (@PathVariable Long id){
-        service.deleteAlunoById(id);
-        return ResponseEntity.noContent().build();
-    }
-
 
     @PostMapping
     public ResponseEntity<Aluno> insertAluno(@RequestBody Map<String, Object> alunoMap) {
@@ -85,6 +72,13 @@ public class AlunoResource {
             return  ResponseEntity.notFound().build();
 
         }
+    }
+
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> deleteAlunoById (@PathVariable Long id){
+        service.deleteAlunoById(id);
+        return ResponseEntity.noContent().build();
     }
 
 }
