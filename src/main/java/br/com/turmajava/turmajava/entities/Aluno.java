@@ -2,11 +2,9 @@ package br.com.turmajava.turmajava.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import org.apache.juli.logging.Log;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Objects;
 

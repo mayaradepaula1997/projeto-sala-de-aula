@@ -5,7 +5,6 @@ import br.com.turmajava.turmajava.entities.Professor;
 import br.com.turmajava.turmajava.services.ProfessorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -42,11 +41,10 @@ public class ProfessorResource {
         novoProfessor.setContratacao(LocalDate.parse((String) professorMap.get("contratacao")));
 
 
-
-       Professor savedProfessor = professorService.insert(novoProfessor);
+       Professor saveProfessor = professorService.insert(novoProfessor);
        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-               .buildAndExpand(savedProfessor.getId()).toUri();
-       return ResponseEntity.created(uri).body(savedProfessor);
+               .buildAndExpand(saveProfessor.getId()).toUri();
+       return ResponseEntity.created(uri).body(saveProfessor);
    }
 
 

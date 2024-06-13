@@ -1,6 +1,4 @@
 package br.com.turmajava.turmajava.services;
-
-import br.com.turmajava.turmajava.entities.Aluno;
 import br.com.turmajava.turmajava.entities.SalaDeAula;
 import br.com.turmajava.turmajava.repositories.SalaDeAulaRepository;
 import org.springframework.beans.factory.annotation.Autowired;

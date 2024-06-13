@@ -39,7 +39,7 @@ public class Professor implements Serializable {
         this.id = id;
     }
 
-    public String getNome(String nome) {
+    public String getNome() {
         return this.nome;
     }
 
@@ -47,7 +47,7 @@ public class Professor implements Serializable {
         this.nome = nome;
     }
 
-    public String getMateria(String materia) {
+    public String getMateria() {
         return this.materia;
     }
 

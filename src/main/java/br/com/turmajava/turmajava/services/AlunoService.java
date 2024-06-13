@@ -1,9 +1,8 @@
 package br.com.turmajava.turmajava.services;
-
 import br.com.turmajava.turmajava.entities.Aluno;
 import br.com.turmajava.turmajava.repositories.AlunoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;

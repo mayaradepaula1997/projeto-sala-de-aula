@@ -9,7 +9,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
+
 
 @Entity
 @Table(name = "tb_sala_de_aula")

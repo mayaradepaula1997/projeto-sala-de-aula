@@ -2,11 +2,14 @@ package br.com.turmajava.turmajava.resource;
 
 
 import br.com.turmajava.turmajava.entities.Aluno;
+import br.com.turmajava.turmajava.entities.Diretor;
 import br.com.turmajava.turmajava.entities.SalaDeAula;
 import br.com.turmajava.turmajava.exception.ResourceNotFoundException;
 import br.com.turmajava.turmajava.repositories.SalaDeAulaRepository;
 import br.com.turmajava.turmajava.services.AlunoService;
+import br.com.turmajava.turmajava.services.DiretorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -25,6 +28,9 @@ public class AlunoResource {
 
     @Autowired //@Autowired para fazermos uma injeção de dependência
     private SalaDeAulaRepository salaDeAulaRepository;
+
+    @Autowired
+    private DiretorService diretorService;
 
 
     @GetMapping
@@ -51,10 +57,30 @@ public class AlunoResource {
         aluno.setDataNascimento(LocalDate.parse((String) alunoMap.get("dataNascimento")));
         aluno.setSexo((String) alunoMap.get("sexo"));
 
-        Long salaDeAulaId = Long.valueOf((Integer) alunoMap.get("sala_de_aula"));
-        SalaDeAula salaDeAula = salaDeAulaRepository.findById(salaDeAulaId)
-                .orElseThrow(() -> new ResourceNotFoundException("SalaDeAula not found with id " + salaDeAulaId));
-        aluno.setSalaDeAula(salaDeAula);
+
+        if(alunoMap.get("diretorId") == null){
+            return new ResponseEntity("Precisa ser um diretor, para criar" , HttpStatus.BAD_REQUEST);
+        }
+
+
+        if(alunoMap.get("diretorId") != null){
+            Long diretorId = Long.valueOf((Integer) alunoMap.get("diretorId"));
+            Diretor diretor = diretorService.findById(diretorId);
+
+            if (!diretor.getSuperUsuario()){
+                return new ResponseEntity("Precisa ser um diretor, para criar" , HttpStatus.BAD_REQUEST);
+
+            }
+
+        }
+
+
+        if (alunoMap.get("sala_de_aula") != null) {
+            Long salaDeAulaId = Long.valueOf((Integer) alunoMap.get("sala_de_aula"));
+            SalaDeAula salaDeAula = salaDeAulaRepository.findById(salaDeAulaId)
+                    .orElseThrow(() -> new ResourceNotFoundException("SalaDeAula not found with id " + salaDeAulaId));
+            aluno.setSalaDeAula(salaDeAula);
+        }
 
         Aluno insertAluno = service.insert(aluno);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(insertAluno.getId()).toUri();

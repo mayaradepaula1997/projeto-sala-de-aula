@@ -39,8 +39,8 @@ public class ProfessorService {
         Professor professor = findById(id);
         if (professor != null) {
             professorRepository.deleteById(professor.getId());
-        } else {
-            throw new ResourceNotFoundException("Id naão existe");
+        }else{
+            throw new ResourceNotFoundException("Id não existe");
         }
 
     }
@@ -53,15 +53,16 @@ public class ProfessorService {
 
 
     //atualizar o professor
-    public Professor update (Long id, Professor professor){
+    public Professor update (Long id, Professor professor) {
         Professor professorExiste = findById(id);
-        if(professorExiste == null){
+        if (professorExiste == null) {
             throw new ResourceNotFoundException("Professor não encontrado");
+        }else{
+            professorExiste.setNome(professor.getNome());
+            professorExiste.setMateria(professor.getMateria());
+            professorExiste.setContratacao(professor.getContratacao());
+            return professorRepository.save(professorExiste);
         }
-        professorExiste.setNome(professor.getNome("nome"));
-        professorExiste.setMateria(professor.getMateria("materia"));
-        professorExiste.setContratacao(professor.getContratacao());
-        return professorRepository.save(professorExiste);
     }
 
 }
