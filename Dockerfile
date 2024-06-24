@@ -1,20 +1,26 @@
-FROM ubuntu:latest AS build
 
-RUN apt-get update
+FROM maven:3.8.5-openjdk-17 AS build
 
-RUN apt-get install openjdk-17-jdk -y
+WORKDIR /app
 
-COPY . .
+COPY pom.xml .
 
-RUN apt-get install maven -y
+RUN mvn dependency:go-offline
+
+
+COPY src ./src
+
 
 RUN mvn clean install
 
+
 FROM openjdk:17-jdk-slim
+
 
 EXPOSE 8080
 
-COPY --from=build /target/turma-java-0.0.1-SNAPSHOT.jar app.jar
+
+COPY --from=build /app/target/turma-java-0.0.1-SNAPSHOT.jar app.jar
 
 
-ENTRYPOINT [ "java", "-jar", "app.jar" ]
+ENTRYPOINT ["java", "-jar", "app.jar"]
